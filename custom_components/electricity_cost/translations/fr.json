@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tarifs électricité",
+        "description": "Entrez les noms des tarifs séparés par des virgules (ex : {example})",
+        "example": "HC, HP, Weekend",
+        "suggested_value": "HC, HP",
+        "data": {
+          "tariffs_raw": "Noms des tarifs"
+        }
+      },
+      "price_entities": {
+        "title": "Entités de prix",
+        "description": "Pour chaque tarif, sélectionnez l'entité input_number qui contient le prix en €/kWh",
+        "data": {}
+      }
+    },
+    "abort": {
+      "already_configured": "L'intégration est déjà configurée. Utilisez le bouton ⚙ pour ajouter des appareils."
+    },
+    "error": {
+      "at_least_one_tariff": "Entrez au moins un tarif",
+      "duplicate_tariffs": "Les noms de tarifs doivent être uniques",
+      "required_entity": "Sélectionnez une entité"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Gérer les appareils",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "add_device": {
+        "title": "Ajouter un appareil",
+        "description": "Tarifs disponibles : {tariffs}",
+        "data": {
+          "device_name": "Nom de l'appareil",
+          "source_sensor": "Capteur de consommation (kWh)",
+          "reset_entity": "Entité de reset au démarrage (optionnel)"
+        }
+      },
+      "remove_device": {
+        "title": "Supprimer un appareil",
+        "description": "L'appareil et toutes ses entités seront supprimés.",
+        "data": {
+          "device_to_remove": "Appareil à supprimer"
+        }
+      }
+    },
+    "error": {
+      "empty_device_name": "Le nom ne peut pas être vide",
+      "duplicate_device_name": "Un appareil avec ce nom existe déjà"
+    }
+  },
+  "services": {
+    "reset": {
+      "name": "Réinitialiser le compteur",
+      "description": "Remet un ou plusieurs compteurs d'énergie à zéro."
+    }
+  }
+}

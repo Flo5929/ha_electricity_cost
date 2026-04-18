@@ -1,0 +1,9 @@
+reset:
+  name: Reset
+  description: Reset one or more energy meters to zero.
+  icon: mdi:restart
+  target:
+    entity:
+      domain: sensor
+      integration: electricity_cost
+      device_class: energy

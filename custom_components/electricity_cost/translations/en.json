@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Electricity tariffs",
+        "description": "Enter tariff names separated by commas (e.g. {example})",
+        "example": "Off-Peak, Peak, Weekend",
+        "suggested_value": "Off-Peak, Peak",
+        "data": {
+          "tariffs_raw": "Tariff names"
+        }
+      },
+      "price_entities": {
+        "title": "Price entities",
+        "description": "For each tariff, select the input_number entity that holds the price in €/kWh",
+        "data": {}
+      }
+    },
+    "abort": {
+      "already_configured": "The integration is already configured. Use the ⚙ button to add devices."
+    },
+    "error": {
+      "at_least_one_tariff": "Enter at least one tariff",
+      "duplicate_tariffs": "Tariff names must be unique",
+      "required_entity": "Please select an entity"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage devices",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "add_device": {
+        "title": "Add a metered device",
+        "description": "Available tariffs: {tariffs}",
+        "data": {
+          "device_name": "Device name",
+          "source_sensor": "Energy consumption sensor (kWh)",
+          "reset_entity": "Reset entity on power-on (optional)"
+        }
+      },
+      "remove_device": {
+        "title": "Remove a device",
+        "description": "The device and all its entities will be removed.",
+        "data": {
+          "device_to_remove": "Device to remove"
+        }
+      }
+    },
+    "error": {
+      "empty_device_name": "Device name cannot be empty",
+      "duplicate_device_name": "A device with this name already exists"
+    }
+  },
+  "services": {
+    "reset": {
+      "name": "Reset meter",
+      "description": "Reset one or more energy meters to zero."
+    }
+  }
+}

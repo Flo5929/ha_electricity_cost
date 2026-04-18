@@ -1,0 +1,5 @@
+{
+  "name": "Electricity Cost",
+  "content_in_root": false,
+  "homeassistant": "2023.4.0"
+}
