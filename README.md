@@ -237,24 +237,13 @@ cards:
 ## Publishing updates (maintainers)
 
 1. Bump `version` in `manifest.json`
-2. Create a GitHub Release tagged `v1.x.x`
+2. Push a tag — the release is created automatically:
+   ```
+   git tag 1.2.0 && git push --tags
+   ```
 3. HACS notifies users of the update automatically
 
-Tip: with the GitHub Action below, `git tag v1.1.0 && git push --tags` is all you need.
-
-```yaml
-# .github/workflows/release.yml
-name: Release
-on:
-  push:
-    tags: ["v*"]
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: softprops/action-gh-release@v1
-```
+The release workflow is defined in [`.github/workflows/release.yml`](.github/workflows/release.yml).
 
 ---
 

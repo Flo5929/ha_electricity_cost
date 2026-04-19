@@ -237,24 +237,13 @@ cards:
 ## Publier des mises à jour (mainteneurs)
 
 1. Incrémentez `version` dans `manifest.json`
-2. Créez une GitHub Release avec le tag `v1.x.x`
+2. Poussez un tag — la release est créée automatiquement :
+   ```
+   git tag 1.2.0 && git push --tags
+   ```
 3. HACS notifie les utilisateurs de la mise à jour automatiquement
 
-Astuce : avec le GitHub Action ci-dessous, `git tag v1.1.0 && git push --tags` suffit.
-
-```yaml
-# .github/workflows/release.yml
-name: Release
-on:
-  push:
-    tags: ["v*"]
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: softprops/action-gh-release@v1
-```
+Le workflow de release est défini dans [`.github/workflows/release.yml`](.github/workflows/release.yml).
 
 ---
 
