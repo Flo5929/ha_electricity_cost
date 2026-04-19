@@ -39,7 +39,51 @@
         "data": {
           "device_name": "Nom de l'appareil",
           "source_sensor": "Capteur de consommation (kWh)",
-          "reset_entity": "Entité de reset au démarrage (optionnel)"
+          "cycle_type": "Gestion de cycle"
+        }
+      },
+      "cycle_manual": {
+        "title": "Cycle manuel",
+        "description": "Sélectionnez une entité qui déclenche un reset des compteurs lors d'une transition OFF→ON.",
+        "data": {
+          "cycle_manual_trigger": "Entité de déclenchement (optionnel)"
+        }
+      },
+      "cycle_auto": {
+        "title": "Cycle automatique — Seuils",
+        "description": "Configurez le capteur de puissance et les seuils pour la détection automatique de cycle.",
+        "data": {
+          "cycle_power_sensor": "Capteur de puissance (W)",
+          "cycle_start_threshold": "Seuil de début (W)",
+          "cycle_start_duration": "Durée de début (secondes)",
+          "cycle_end_threshold": "Seuil de fin (W)",
+          "cycle_end_duration": "Durée de fin (secondes)"
+        }
+      },
+      "cycle_notifications": {
+        "title": "Cycle automatique — Notifications",
+        "description": "Templates disponibles dans le message : {templates}",
+        "data": {
+          "cycle_notifiers": "Services notify / scripts (optionnel)",
+          "cycle_notification_title": "Titre de la notification",
+          "cycle_notification_message": "Message de la notification",
+          "cycle_alert_enabled": "Activer l'alerte (binary_sensor pour l'intégration Alert de HA)"
+        }
+      },
+      "edit_device": {
+        "title": "Modifier un appareil",
+        "data": {
+          "device_to_edit": "Appareil à modifier"
+        }
+      },
+      "edit_auto_thresholds": {
+        "title": "Modifier les seuils du cycle automatique",
+        "data": {
+          "cycle_power_sensor": "Capteur de puissance (W)",
+          "cycle_start_threshold": "Seuil de début (W)",
+          "cycle_start_duration": "Durée de début (secondes)",
+          "cycle_end_threshold": "Seuil de fin (W)",
+          "cycle_end_duration": "Durée de fin (secondes)"
         }
       },
       "remove_device": {
@@ -59,6 +103,21 @@
     "reset": {
       "name": "Réinitialiser le compteur",
       "description": "Remet un ou plusieurs compteurs d'énergie à zéro."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cycle_state": {
+        "name": "État du cycle",
+        "state": {
+          "idle": "En veille",
+          "running": "En cours",
+          "finished": "Fini"
+        }
+      },
+      "cycle_cost": {
+        "name": "Coût total"
+      }
     }
   }
 }

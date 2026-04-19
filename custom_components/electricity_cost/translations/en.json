@@ -39,7 +39,51 @@
         "data": {
           "device_name": "Device name",
           "source_sensor": "Energy consumption sensor (kWh)",
-          "reset_entity": "Reset entity on power-on (optional)"
+          "cycle_type": "Cycle management"
+        }
+      },
+      "cycle_manual": {
+        "title": "Manual cycle",
+        "description": "Select an entity that triggers a counter reset on OFF→ON transition.",
+        "data": {
+          "cycle_manual_trigger": "Trigger entity (optional)"
+        }
+      },
+      "cycle_auto": {
+        "title": "Automatic cycle — Thresholds",
+        "description": "Configure the power sensor and thresholds for automatic cycle detection.",
+        "data": {
+          "cycle_power_sensor": "Power sensor (W)",
+          "cycle_start_threshold": "Start threshold (W)",
+          "cycle_start_duration": "Start duration (seconds)",
+          "cycle_end_threshold": "End threshold (W)",
+          "cycle_end_duration": "End duration (seconds)"
+        }
+      },
+      "cycle_notifications": {
+        "title": "Automatic cycle — Notifications",
+        "description": "Available templates in message: {templates}",
+        "data": {
+          "cycle_notifiers": "Notify services / scripts (optional)",
+          "cycle_notification_title": "Notification title",
+          "cycle_notification_message": "Notification message",
+          "cycle_alert_enabled": "Enable alert (binary_sensor for HA Alert integration)"
+        }
+      },
+      "edit_device": {
+        "title": "Edit a device",
+        "data": {
+          "device_to_edit": "Device to edit"
+        }
+      },
+      "edit_auto_thresholds": {
+        "title": "Edit automatic cycle thresholds",
+        "data": {
+          "cycle_power_sensor": "Power sensor (W)",
+          "cycle_start_threshold": "Start threshold (W)",
+          "cycle_start_duration": "Start duration (seconds)",
+          "cycle_end_threshold": "End threshold (W)",
+          "cycle_end_duration": "End duration (seconds)"
         }
       },
       "remove_device": {
@@ -59,6 +103,21 @@
     "reset": {
       "name": "Reset meter",
       "description": "Reset one or more energy meters to zero."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "cycle_state": {
+        "name": "Cycle state",
+        "state": {
+          "idle": "Idle",
+          "running": "Running",
+          "finished": "Finished"
+        }
+      },
+      "cycle_cost": {
+        "name": "Total cost"
+      }
     }
   }
 }
