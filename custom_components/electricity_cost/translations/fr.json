@@ -67,7 +67,8 @@
           "cycle_notifiers": "Services notify / scripts (optionnel)",
           "cycle_notification_title": "Titre de la notification",
           "cycle_notification_message": "Message de la notification",
-          "cycle_alert_enabled": "Activer l'alerte (binary_sensor pour l'intégration Alert de HA)"
+          "cycle_alert_enabled": "Activer l'alerte (binary_sensor pour l'intégration Alert de HA)",
+          "cycle_alert_entity": "Entité Alert HA à écouter pour l'acquittement (optionnel)"
         }
       },
       "edit_device": {

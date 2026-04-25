@@ -25,6 +25,7 @@ from .const import (
     CONF_CYCLE_NOTIFICATION_TITLE,
     CONF_CYCLE_NOTIFICATION_MESSAGE,
     CONF_CYCLE_ALERT_ENABLED,
+    CONF_CYCLE_ALERT_ENTITY,
     CYCLE_TYPE_MANUAL,
     CYCLE_TYPE_AUTO,
     CYCLE_STATE_IDLE,
@@ -149,6 +150,15 @@ class CycleManager:
                 self._hass, [power_sensor_id], self._handle_power_change,
             )
         )
+
+        # Listen for the optional HA Alert entity acknowledgement
+        alert_entity_id = self._device.get(CONF_CYCLE_ALERT_ENTITY)
+        if alert_entity_id:
+            self._unsub_listeners.append(
+                async_track_state_change_event(
+                    self._hass, [alert_entity_id], self._handle_alert_ack,
+                )
+            )
 
     @callback
     def _handle_power_change(self, event: Event) -> None:
@@ -316,6 +326,25 @@ class CycleManager:
     # ------------------------------------------------------------------
     # Acknowledge
     # ------------------------------------------------------------------
+    @callback
+    def _handle_alert_ack(self, event: Event) -> None:
+        """Called when the configured HA Alert entity changes state.
+
+        When the alert transitions from 'on' to 'idle' or 'off' it means
+        it has been acknowledged (or the condition cleared). We use that
+        to move the cycle back to idle.
+        """
+        old_state = event.data.get("old_state")
+        new_state = event.data.get("new_state")
+        if old_state is None or new_state is None:
+            return
+        if old_state.state == "on" and new_state.state in ("idle", "off"):
+            _LOGGER.info(
+                "HA Alert acknowledged for %s — transitioning cycle to idle",
+                self._device_name,
+            )
+            self.acknowledge()
+
     @callback
     def acknowledge(self) -> None:
         """Acknowledge the cycle: move back to idle, turn off alert."""

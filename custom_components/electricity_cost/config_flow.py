@@ -28,6 +28,7 @@ from .const import (
     CONF_CYCLE_NOTIFICATION_TITLE,
     CONF_CYCLE_NOTIFICATION_MESSAGE,
     CONF_CYCLE_ALERT_ENABLED,
+    CONF_CYCLE_ALERT_ENTITY,
     CYCLE_TYPE_NONE,
     CYCLE_TYPE_MANUAL,
     CYCLE_TYPE_AUTO,
@@ -430,6 +431,11 @@ class ElectricityCostOptionsFlow(config_entries.OptionsFlow):
                 self._pending_device[CONF_CYCLE_NOTIFICATION_MESSAGE] = message
             alert = user_input.get(CONF_CYCLE_ALERT_ENABLED, False)
             self._pending_device[CONF_CYCLE_ALERT_ENABLED] = alert
+            alert_entity = user_input.get(CONF_CYCLE_ALERT_ENTITY) or None
+            if alert_entity:
+                self._pending_device[CONF_CYCLE_ALERT_ENTITY] = alert_entity
+            else:
+                self._pending_device.pop(CONF_CYCLE_ALERT_ENTITY, None)
 
             return self._save_pending_device()
 
@@ -452,6 +458,7 @@ class ElectricityCostOptionsFlow(config_entries.OptionsFlow):
         existing_title = ""
         existing_message = ""
         existing_alert = False
+        existing_alert_entity = None
         if self._pending_device:
             notif_list = self._pending_device.get(CONF_CYCLE_NOTIFIERS, [])
             if isinstance(notif_list, list):
@@ -461,6 +468,7 @@ class ElectricityCostOptionsFlow(config_entries.OptionsFlow):
             existing_title = self._pending_device.get(CONF_CYCLE_NOTIFICATION_TITLE, "")
             existing_message = self._pending_device.get(CONF_CYCLE_NOTIFICATION_MESSAGE, "")
             existing_alert = self._pending_device.get(CONF_CYCLE_ALERT_ENABLED, False)
+            existing_alert_entity = self._pending_device.get(CONF_CYCLE_ALERT_ENTITY)
 
         return self.async_show_form(
             step_id="cycle_notifications",
@@ -479,6 +487,17 @@ class ElectricityCostOptionsFlow(config_entries.OptionsFlow):
                     vol.Optional(CONF_CYCLE_NOTIFICATION_TITLE, default=existing_title): str,
                     vol.Optional(CONF_CYCLE_NOTIFICATION_MESSAGE, default=existing_message): str,
                     vol.Optional(CONF_CYCLE_ALERT_ENABLED, default=existing_alert): bool,
+                    vol.Optional(
+                        CONF_CYCLE_ALERT_ENTITY,
+                        **({
+                            "default": existing_alert_entity,
+                        } if existing_alert_entity else {}),
+                    ): selector.EntitySelector(
+                        selector.EntitySelectorConfig(
+                            domain="alert",
+                            multiple=False,
+                        )
+                    ),
                 }
             ),
             description_placeholders={

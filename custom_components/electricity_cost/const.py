@@ -24,6 +24,7 @@ CONF_CYCLE_NOTIFIERS = "cycle_notifiers"
 CONF_CYCLE_NOTIFICATION_TITLE = "cycle_notification_title"
 CONF_CYCLE_NOTIFICATION_MESSAGE = "cycle_notification_message"
 CONF_CYCLE_ALERT_ENABLED = "cycle_alert_enabled"
+CONF_CYCLE_ALERT_ENTITY = "cycle_alert_entity"
 
 # Cycle states
 CYCLE_STATE_IDLE = "idle"
